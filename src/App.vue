@@ -1,13 +1,15 @@
 <template>
   <nav>
-    <!--  
-    <router-link to="/about">About</router-link>
-    <router-link to="/profile">Profile</router-link>
-    <router-link to="/investorTerms">InvestorTerms</router-link>
-    <router-link to="/issuerTerms">IssuerTerms</router-link>
-    --> 
+    <div>
+      <!--  
+      <router-link to="/about">About</router-link>
+      <router-link to="/profile">Profile</router-link>
+      <router-link to="/investorTerms">InvestorTerms</router-link>
+      <router-link to="/issuerTerms">IssuerTerms</router-link>
+      --> 
     <router-link to="/">Home</router-link> |
     <router-link to="/termsandconditionsform">Terms and Conditions</router-link>
+    </div>
   </nav>
   <router-view/>
 </template>
@@ -19,10 +21,29 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+}
+
+.home {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 nav {
+  width: 100vw;
   padding: 30px;
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 nav a {
@@ -31,6 +52,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #FF2774;
 }
 </style>
