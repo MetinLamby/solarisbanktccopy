@@ -54,4 +54,13 @@ nav a {
 nav a.router-link-exact-active {
   color: #FF2774;
 }
+
+.headerTermPage {
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: -1px;
+  line-height: 70px;
+}
+
+
 </style>

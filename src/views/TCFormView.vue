@@ -102,8 +102,8 @@
 
         </div>
         <div class="termsAndConditionsBtn">
-            <router-link :to="{path: '/' + this.residenceCountry + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>
-            <!--<router-link :to="{path: '/' + this.residenceCountry + '/' + this.ibanCode + '/' + this.preferredLanguage + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>-->
+            <!--<router-link :to="{path: '/' + this.residenceCountry + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>-->
+            <router-link :to="{path: '/' + this.residenceCountry + '/' + this.ibanCode + '/' + this.preferredLanguage + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>
         </div>
         </div>
     </div>
