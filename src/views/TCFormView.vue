@@ -184,7 +184,8 @@
 }
 
 .termsAndConditionsBtn {
-    margin-top: 30px;;
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
 .btn-ghost {
@@ -196,7 +197,6 @@
     opacity: 0.6;
     transition: opacity 0.3s ease;
     text-decoration: none;
-
 }
 
 .btn-ghost:hover {
