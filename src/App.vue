@@ -37,7 +37,8 @@
 
 nav {
   width: 100vw;
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   position: absolute;
   z-index: 1;
   top: 0px;
