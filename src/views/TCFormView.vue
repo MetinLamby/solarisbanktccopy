@@ -8,7 +8,7 @@
         </div>
         <div class="termsAndConditionsInputForm">
             <p class="formHeader">Please select from the dropdowns</p>
-            <div class="countryOfResidence">
+            <div class="userType">
                 <div>User Type: {{ userTypeSelected }}</div>
                 <select v-model="userTypeSelected">
                     <option disabled value="">Please Select which Type of User you are</option>
