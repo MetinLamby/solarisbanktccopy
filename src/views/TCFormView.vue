@@ -8,17 +8,102 @@
         </div>
         <div class="termsAndConditionsInputForm">
             <p class="formHeader">Please select from the dropdowns</p>
-            <div class="userType">
-                <div>User Type: {{ userTypeSelected }}</div>
-                <select v-model="userTypeSelected">
-                    <option disabled value="">Please Select which Type of User you are</option>
-                    <option>Issuer</option>
-                    <option>Investor</option>
+
+
+
+
+
+            <div class="countryOfResidence">
+                <div>Country of Residence</div>
+                <select v-model="residenceCountry">
+                    <option disabled value="">Please Select your Country</option>
+                    <option>France</option>
+                    <option>Germany</option>
+                    <option>Italy</option>
+                    <option>Spain</option>
                 </select>
             </div>
+
+
+
+
+
+            <div class="IBANcountryCode">
+                <div>Country Code of your IBAN</div>
+                <select v-model="ibanCode" :disabled=isDisabledResidence>
+                    <option disabled value="">Please Select the first letters of your IBAN</option>
+                    <template v-if="this.residenceCountry === 'France'">
+                        <option v-for="ibanCodeListFranceItem in ibanCodeListFrance" :key="ibanCodeListFranceItem">{{ibanCodeListFranceItem}}</option>
+                    </template>
+                    <template v-if="this.residenceCountry === 'Germany'">
+                        <option v-for="ibanCodeListGermanyItem in ibanCodeListGermany" :key="ibanCodeListGermanyItem">{{ibanCodeListGermanyItem}}</option>
+                    </template>
+                    <template v-if="this.residenceCountry === 'Italy'">
+                        <option v-for="ibanCodeListItalyItem in ibanCodeListItaly" :key="ibanCodeListItalyItem">{{ibanCodeListItalyItem}}</option>
+                    </template>
+                    <template v-if="this.residenceCountry === 'Spain'">
+                        <option v-for="ibanCodeListSpainItem in ibanCodeListSpain" :key="ibanCodeListSpainItem">{{ibanCodeListSpainItem}}</option>
+                    </template>
+                </select>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <div class="languagePreference">
+                <div>Prefrerred Language</div>
+                <select v-model="preferredLanguage" :disabled=isDisabledIBAN>
+                    <option disabled value="">Please Select your Language</option>
+
+
+                    <template v-if="this.residenceCountry === 'France' && this.ibanCode === 'DE'">
+                        <option v-for="preferredLanguageListFranceDEItem in preferredLanguageListFranceDE" :key="preferredLanguageListFranceDEItem">{{preferredLanguageListFranceDEItem}}</option>
+                    </template>
+                    <template v-if="this.residenceCountry === 'France' && this.ibanCode === 'FR'">
+                        <option v-for="preferredLanguageListFranceFRItem in preferredLanguageListFranceFR" :key="preferredLanguageListFranceFRItem">{{preferredLanguageListFranceFRItem}}</option>
+                    </template>
+
+
+                    <template v-if="this.residenceCountry === 'Germany' && this.ibanCode === 'DE'">
+                        <option v-for="preferredLanguageListGermanyDEItem in preferredLanguageListGermanyDE" :key="preferredLanguageListGermanyDEItem">{{preferredLanguageListGermanyDEItem}}</option>
+                    </template>
+
+
+                    <template v-if="this.residenceCountry === 'Italy' && this.ibanCode === 'DE'">
+                        <option v-for="preferredLanguageListItalyDEItem in preferredLanguageListItalyDE" :key="preferredLanguageListItalyDEItem">{{preferredLanguageListItalyDEItem}}</option>
+                    </template>
+                    <template v-if="this.residenceCountry === 'Italy' && this.ibanCode === 'IT'">
+                        <option v-for="preferredLanguageListItalyITItem in preferredLanguageListItalyIT" :key="preferredLanguageListItalyITItem">{{preferredLanguageListItalyITItem}}</option>
+                    </template>
+
+
+                    <template v-if="this.residenceCountry === 'Spain' && this.ibanCode === 'DE'">
+                        <option v-for="preferredLanguageListSpainDEItem in preferredLanguageListSpainDE" :key="preferredLanguageListSpainDEItem">{{preferredLanguageListSpainDEItem}}</option>
+                    </template>
+                    <template v-if="this.residenceCountry === 'Spain' && this.ibanCode === 'ES'">
+                        <option v-for="preferredLanguageListSpainESItem in preferredLanguageListSpainES" :key="preferredLanguageListSpainESItem">{{preferredLanguageListSpainESItem}}</option>
+                    </template>
+                    
+                </select>
+            </div>
+
+
+
+
+
+
+
+
         </div>
         <div class="termsAndConditionsBtn">
-            <router-link :to="{path: '/' + this.userTypeSelected + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>
+            <router-link :to="{path: '/' + this.residenceCountry + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>
+            <!--<router-link :to="{path: '/' + this.residenceCountry + '/' + this.ibanCode + '/' + this.preferredLanguage + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>-->
         </div>
         </div>
     </div>
@@ -27,13 +112,38 @@
 
 
 <script>
-  export default {
-    data() {
-      return {
-        userTypeSelected: ''
-      }
+    export default {
+        data() {
+            return {
+                ibanCodeListFrance: ['DE', 'FR'],
+                ibanCodeListGermany: ['DE'],
+                ibanCodeListItaly: ['DE', 'IT'],
+                ibanCodeListSpain: ['DE', 'ES'],
+
+
+                preferredLanguageListFranceDE: ['French'],
+                preferredLanguageListFranceFR: ['English', 'French'],
+                preferredLanguageListGermanyDE: ['English', 'German'],
+                preferredLanguageListItalyDE: ['Italian'],
+                preferredLanguageListItalyIT: ['English', 'Italian'],
+                preferredLanguageListSpainDE: ['Spanish'],
+                preferredLanguageListSpainES: ['English', 'Spanish'],
+
+
+                residenceCountry: '',
+                ibanCode: '',
+                preferredLanguage: ''
+            }
+        },
+        computed: {
+            isDisabledResidence() {
+                return !this.residenceCountry.localeCompare('');
+            },
+            isDisabledIBAN() {
+                return !this.ibanCode.localeCompare('');
+            },
+        },
     }
-  }
 </script>
 
 <style>
