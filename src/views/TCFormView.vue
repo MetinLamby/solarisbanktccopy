@@ -13,7 +13,7 @@
 
 
 
-            <div class="countryOfResidence">
+            <div class="countryOfResidence form-item">
                 <div>Country of Residence</div>
                 <select v-model="residenceCountry">
                     <option disabled value="">Please Select your Country</option>
@@ -28,7 +28,7 @@
 
 
 
-            <div class="IBANcountryCode">
+            <div class="IBANcountryCode form-item">
                 <div>Country Code of your IBAN</div>
                 <select v-model="ibanCode" :disabled=isDisabledResidence>
                     <option disabled value="">Please Select the first letters of your IBAN</option>
@@ -56,7 +56,7 @@
 
 
 
-            <div class="languagePreference">
+            <div class="languagePreference form-item">
                 <div>Prefrerred Language</div>
                 <select v-model="preferredLanguage" :disabled=isDisabledIBAN>
                     <option disabled value="">Please Select your Language</option>
@@ -149,12 +149,12 @@
 <style>
 
 .outer-container {
-    height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    margin-top: 100px;
 }
 
 .container {
@@ -202,6 +202,14 @@
 .btn-ghost:hover {
     background-color: #FF2774;
     color: white;
+}
+
+.form-item {
+    margin-bottom: 30px;
+}
+
+select {
+    width: 70%;
 }
 
 </style>
