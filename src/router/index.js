@@ -1,20 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import InvestorTerms from '../views/InvestorTermsView.vue'
-import IssuerTerms from '../views/IssuerTermsView.vue'
 import TCForm from '../views/TCFormView.vue'
-import FranceDEFrench from '../views/FranceDEFrench.vue'
-import FranceFREnglish from '../views/FranceFREnglish.vue'
-import FranceFRFrench from '../views/FranceFRFrench.vue'
-import GermanyDEEnglish from '../views/GermanyDEEnglish.vue'
-import GermanyDEGerman from '../views/GermanyDEGerman.vue'
-import ItalyDEItalian from '../views/ItalyDEItalian.vue'
-import ItalyITEnglish from '../views/ItalyITEnglish.vue'
-import ItalyITItalian from '../views/ItalyITItalian.vue'
-import SpainDESpanish from '../views/SpainDESpanish.vue'
-import SpainESEnglish from '../views/SpainESEnglish.vue'
-import SpainESSpanish from '../views/SpainESSpanish.vue'
-
+import GermanyANDUser from '../views/GermanyANDUser.vue'
+import GermanyANDUserANDBKYC from '../views/GermanyANDUserANDBKYC.vue'
+import GermanyANDUserANDBKYCANDIssuer from '../views/GermanyANDUserANDBKYCANDIssuer.vue'
 
 const routes = [
   {
@@ -28,72 +17,35 @@ const routes = [
     component: TCForm,
   },
   {
-    path: '/France/DE/FrenchTerms',
-    name: 'FranceDEFrenchTerms',
-    component: FranceDEFrench,
+    path: '/country=Germany/user=Yes/kyc=/kycType=/issuer=',
+    name: 'germanyUser',
+    component: GermanyANDUser,
   },
   {
-    path: '/France/FR/EnglishTerms',
-    name: 'FranceFREnglishTerms',
-    component: FranceFREnglish,
+    path: '/country=Germany/user=Yes/kyc=No/kycType=/issuer=',
+    name: 'germanyUserNoKYC',
+    component: GermanyANDUser,
   },
   {
-    path: '/France/FR/FrenchTerms',
-    name: 'FranceFRFrenchTerms',
-    component: FranceFRFrench,
+    path: '/country=Germany/user=Yes/kyc=Yes/kycType=/issuer=',
+    name: 'germanyUserKYC',
+    component: GermanyANDUser,
   },
   {
-    path: '/Germany/DE/EnglishTerms',
-    name: 'GermanyDEEnglishTerms',
-    component: GermanyDEEnglish,
+    path: '/country=Germany/user=Yes/kyc=Yes/kycType=corporate(BKYC)/issuer=',
+    name: 'germanyUserBKYC',
+    component: GermanyANDUserANDBKYC,
   },
   {
-    path: '/Germany/DE/GermanTerms',
-    name: 'GermanyDEGermanTerms',
-    component: GermanyDEGerman,
+    path: '/country=Germany/user=Yes/kyc=Yes/kycType=corporate(BKYC)/issuer=No',
+    name: 'germanyUserBKYCNoIssuer',
+    component: GermanyANDUserANDBKYC,
   },
   {
-    path: '/Italy/DE/ItalianTerms',
-    name: 'ItalyDEItalianTerms',
-    component: ItalyDEItalian,
+    path: '/country=Germany/user=Yes/kyc=Yes/kycType=corporate(BKYC)/issuer=Yes',
+    name: 'germanyUserBKYCIssuer',
+    component: GermanyANDUserANDBKYCANDIssuer,
   },
-  {
-    path: '/Italy/IT/EnglishTerms',
-    name: 'ItalyITEnglishTerms',
-    component: ItalyITEnglish,
-  },
-  {
-    path: '/Italy/IT/ItalianTerms',
-    name: 'ItalyITItalianTerms',
-    component: ItalyITItalian,
-  },
-  {
-    path: '/Spain/DE/SpanishTerms',
-    name: 'SpainDESpanishTerms',
-    component: SpainDESpanish,
-  },
-  {
-    path: '/Spain/ES/EnglishTerms',
-    name: 'SpainESEnglishTerms',
-    component: SpainESEnglish,
-  },
-  {
-    path: '/Spain/ES/SpanishTerms',
-    name: 'SpainESSpanishTerms',
-    component: SpainESSpanish,
-  },
-
-  
-  {
-    path: '/IssuerTerms',
-    name: 'IssuerTerms',
-    component: IssuerTerms,
-  },
-  {
-    path: '/InvestorTerms',
-    name: 'InvestorTerms',
-    component: InvestorTerms,
-  }
 ]
 
 const router = createRouter({
