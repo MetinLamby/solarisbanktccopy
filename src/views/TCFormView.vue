@@ -1,112 +1,87 @@
 <template>
     <div class="outer-container">
         <div class="container">
-        <div>
-            <div class="termsAndConditionsText">
-            <h1 class="headerText">Terms & Conditions and Customer Information</h1>
-            <p class="bodyText">To help us guide you to the right information, please pick your country of residence, the country code of the IBAN of your main account and the language you would prefer</p>
-        </div>
-        <div class="termsAndConditionsInputForm">
-            <p class="formHeader">Please select from the dropdowns</p>
+            <div>
+                <div class="termsAndConditionsText">
+                    <h1 class="headerText">Terms & Conditions and Customer Information</h1>
+                    <p class="bodyText">To help us guide you to the right information, please help us identify which type of user you are by selecting the correct options from the below dropdown menu</p>
+                </div>
+                <div class="termsAndConditionsInputForm">
+                    <p class="formHeader">Please select from the dropdowns</p>
 
 
+                    <div class="countryOfResidence form-item">
+                        <div>What is your country of residence?</div>
+                        <select v-model="residenceCountry">
+                            <option disabled value="">Please Select your Country</option>
+                            <option>Germany</option>
+                        </select>
+                    </div>
 
 
+                    <div class="userRegistration form-item">
+                        <div>Are you registered as a user on the 360X platform?</div>
+                        <select v-model="userRegistered"  @change="addStyleForActiveBtn()" :disabled="isDisabledResidence">
+                            <option disabled value="">Please select whether you are registered as a user</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
 
-            <div class="countryOfResidence form-item">
-                <div>Country of Residence</div>
-                <select v-model="residenceCountry">
-                    <option disabled value="">Please Select your Country</option>
-                    <option>France</option>
-                    <option>Germany</option>
-                    <option>Italy</option>
-                    <option>Spain</option>
-                </select>
-            </div>
-
-
-
-
-
-            <div class="IBANcountryCode form-item">
-                <div>Country Code of your IBAN</div>
-                <select v-model="ibanCode" :disabled=isDisabledResidence>
-                    <option disabled value="">Please Select the first letters of your IBAN</option>
-                    <template v-if="this.residenceCountry === 'France'">
-                        <option v-for="ibanCodeListFranceItem in ibanCodeListFrance" :key="ibanCodeListFranceItem">{{ibanCodeListFranceItem}}</option>
-                    </template>
-                    <template v-if="this.residenceCountry === 'Germany'">
-                        <option v-for="ibanCodeListGermanyItem in ibanCodeListGermany" :key="ibanCodeListGermanyItem">{{ibanCodeListGermanyItem}}</option>
-                    </template>
-                    <template v-if="this.residenceCountry === 'Italy'">
-                        <option v-for="ibanCodeListItalyItem in ibanCodeListItaly" :key="ibanCodeListItalyItem">{{ibanCodeListItalyItem}}</option>
-                    </template>
-                    <template v-if="this.residenceCountry === 'Spain'">
-                        <option v-for="ibanCodeListSpainItem in ibanCodeListSpain" :key="ibanCodeListSpainItem">{{ibanCodeListSpainItem}}</option>
-                    </template>
-                </select>
-            </div>
-
-
-
-
-
-
-
-
-
-
-            <div class="languagePreference form-item">
-                <div>Prefrerred Language</div>
-                <select v-model="preferredLanguage" :disabled=isDisabledIBAN>
-                    <option disabled value="">Please Select your Language</option>
-
-
-                    <template v-if="this.residenceCountry === 'France' && this.ibanCode === 'DE'">
-                        <option v-for="preferredLanguageListFranceDEItem in preferredLanguageListFranceDE" :key="preferredLanguageListFranceDEItem">{{preferredLanguageListFranceDEItem}}</option>
-                    </template>
-                    <template v-if="this.residenceCountry === 'France' && this.ibanCode === 'FR'">
-                        <option v-for="preferredLanguageListFranceFRItem in preferredLanguageListFranceFR" :key="preferredLanguageListFranceFRItem">{{preferredLanguageListFranceFRItem}}</option>
-                    </template>
-
-
-                    <template v-if="this.residenceCountry === 'Germany' && this.ibanCode === 'DE'">
-                        <option v-for="preferredLanguageListGermanyDEItem in preferredLanguageListGermanyDE" :key="preferredLanguageListGermanyDEItem">{{preferredLanguageListGermanyDEItem}}</option>
-                    </template>
-
-
-                    <template v-if="this.residenceCountry === 'Italy' && this.ibanCode === 'DE'">
-                        <option v-for="preferredLanguageListItalyDEItem in preferredLanguageListItalyDE" :key="preferredLanguageListItalyDEItem">{{preferredLanguageListItalyDEItem}}</option>
-                    </template>
-                    <template v-if="this.residenceCountry === 'Italy' && this.ibanCode === 'IT'">
-                        <option v-for="preferredLanguageListItalyITItem in preferredLanguageListItalyIT" :key="preferredLanguageListItalyITItem">{{preferredLanguageListItalyITItem}}</option>
-                    </template>
-
-
-                    <template v-if="this.residenceCountry === 'Spain' && this.ibanCode === 'DE'">
-                        <option v-for="preferredLanguageListSpainDEItem in preferredLanguageListSpainDE" :key="preferredLanguageListSpainDEItem">{{preferredLanguageListSpainDEItem}}</option>
-                    </template>
-                    <template v-if="this.residenceCountry === 'Spain' && this.ibanCode === 'ES'">
-                        <option v-for="preferredLanguageListSpainESItem in preferredLanguageListSpainES" :key="preferredLanguageListSpainESItem">{{preferredLanguageListSpainESItem}}</option>
+                    <!--
+                    <div class="kycd form-item">
+                            <div>Did you walk through a KYC process on the 360X platform?</div>
+                            <select v-model="userkycd" :disabled="isDisabledUserRegistered">
+                                <option disabled value="">Please select whether you completed a KYC process</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    -->
+                    
+                    <template v-if="this.userRegistered === 'Yes'">
+                        <div class="kycd form-item">
+                            <div>Did you walk through a KYC process on the 360X platform?</div>
+                            <select v-model="userkycd" :disabled="isDisabledUserRegistered">
+                                <option disabled value="">Please select whether you completed a KYC process</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
                     </template>
                     
-                </select>
+
+                    <template v-if="this.userkycd === 'Yes'">
+                        <div class="kycdType form-item">
+                            <div>Did you walk through a private or corporate KYC process?</div>
+                            <select v-model="userkycdType">
+                                <option disabled value="">Please select your KYC process type</option>
+                                <option disabled>private(KYC)</option>
+                                <option>corporate(BKYC)</option>
+                            </select>
+                        </div>
+
+                        <div class="issuer form-item">
+                            <div>Are you an issuer on the 360X platform?</div>
+                            <select v-model="issuer">
+                                <option disabled value="">Please select whether you are an issuer</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </template>
+                </div>
+
+
+                <div class="termsAndConditionsBtn">
+                    <div>
+                        <a v-bind:href="computePath">
+                            <button :disabled="disabledBtn" id="routerBtn" class="nav-link btn btn-ghost">Send Form</button>
+                        </a>
+                    </div>
+                </div>   
             </div>
-
-
-
-
-
-
-
-
         </div>
-        <div class="termsAndConditionsBtn">
-            <!--<router-link :to="{path: '/' + this.residenceCountry + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>-->
-            <router-link :to="{path: '/' + this.residenceCountry + '/' + this.ibanCode + '/' + this.preferredLanguage + 'Terms'}" class="nav-link btn btn-ghost">Show Terms Of Use</router-link>
-        </div>
-        </div>
-    </div>
     </div>
 </template>
 
@@ -115,34 +90,46 @@
     export default {
         data() {
             return {
-                ibanCodeListFrance: ['DE', 'FR'],
-                ibanCodeListGermany: ['DE'],
-                ibanCodeListItaly: ['DE', 'IT'],
-                ibanCodeListSpain: ['DE', 'ES'],
-
-
-                preferredLanguageListFranceDE: ['French'],
-                preferredLanguageListFranceFR: ['English', 'French'],
-                preferredLanguageListGermanyDE: ['English', 'German'],
-                preferredLanguageListItalyDE: ['Italian'],
-                preferredLanguageListItalyIT: ['English', 'Italian'],
-                preferredLanguageListSpainDE: ['Spanish'],
-                preferredLanguageListSpainES: ['English', 'Spanish'],
-
-
                 residenceCountry: '',
-                ibanCode: '',
-                preferredLanguage: ''
+                userRegistered: '',
+                userkycd: '',
+                userkycdType: '',
+                issuer:'',
             }
         },
         computed: {
             isDisabledResidence() {
                 return !this.residenceCountry.localeCompare('');
             },
-            isDisabledIBAN() {
-                return !this.ibanCode.localeCompare('');
+            isDisabledUserRegistered() {
+                if (!this.userRegistered.localeCompare('Yes')) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            disabledBtn() {
+                if (this.userRegistered.localeCompare('Yes')) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            computePath() {
+                return '/country=' + this.residenceCountry + '/user=' + this.userRegistered + '/kyc=' + this.userkycd + '/kycType=' + this.userkycdType + '/issuer=' + this.issuer
             },
         },
+        methods: {
+            addStyleForActiveBtn() {
+                const routeBtn = document.getElementById("routerBtn");
+                if (!this.userRegistered.localeCompare('Yes')) {
+                    routeBtn.classList.add("btn-active");
+                } else if (!this.userRegistered.localeCompare('No') || !this.userRegistered.localeCompare('')) {
+                    routeBtn.classList.remove("btn-active");
+                }
+                return true;
+            },
+        }
     }
 </script>
 
@@ -199,7 +186,14 @@
     text-decoration: none;
 }
 
+/*
 .btn-ghost:hover {
+    background-color: #FF2774;
+    color: white;
+}
+*/
+
+.btn-active:hover {
     background-color: #FF2774;
     color: white;
 }
@@ -210,6 +204,10 @@
 
 select {
     width: 70%;
+}
+
+button {
+    border: none;
 }
 
 </style>
